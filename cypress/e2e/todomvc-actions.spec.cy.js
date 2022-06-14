@@ -10,19 +10,20 @@ describe('Todo App From Tutorial', ()=>{
     todoPage.addTodo("Clean room")
   })
   it('should be able to add a new todo to the list', ()=>{
-   todoPage.validateTodoText(0, 'Clean room')
-    cy.get('.toggle').should('not.be.checked')
+    todoPage.validateTodoText(0, 'Clean room')
+    todoPage.validateToggleState(0, false)
   })
 
-  it('should mark a todo as complete', ()=>{
-    cy.get('.toggle').click()
-    cy.get('.toggle').should('be.checked')
-    cy.get('label').should('have.css', 'text-decoration-line', 'line-through')
-  })
-
-  it('should clear completed todos', function(){
-    cy.contains('Clear completed').click() // get a component based in its text content
-    cy.get('.todo-list').should('not.have.descendants', 'li')
+  describe('toggling todos', ()=>{
+    it('should mark a todo as complete', ()=>{
+      todoPage.validateTodoCompletedState(0)
+    })
+  
+    it('should clear completed todos', function(){
+      todoPage.toggleTodo(0)
+      todoPage.clearCompleted()
+      todoPage.validateNumberOfTodosShown(0)
+    })
   })
 })
 
