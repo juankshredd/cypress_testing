@@ -8,11 +8,15 @@
     }
 
     export function validateTodoText(todoIndex, expectedText){
-        cy.get(`.todo-list li:nth-child(${todoIndex + 1}) label`).should('have.text', expectedText) // validate that label component has the text described Assertion
+        cy
+        .get(`.todo-list li:nth-child(${todoIndex + 1}) label`)
+        .should('have.text', expectedText) // validate that label component has the text described Assertion
     }
 
     export function toggleTodo(todoIndex){
-        cy.get(`.todo-list li:nth-child(${todoIndex + 1}) .toggle`).click()
+        cy
+        .get(`.todo-list li:nth-child(${todoIndex + 1}) .toggle`)
+        .click()
     }
 
     export function showOnlyCompletedTodos(){
